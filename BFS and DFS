@@ -1,0 +1,48 @@
+from collections import deque
+
+def dfs(graph, vertex, visited=None):
+    if visited is None:
+        visited = set()
+    print(vertex)  # Process the current vertex
+    visited.add(vertex)  # Mark the vertex as visited
+    for neighbor in graph[vertex]:
+        if neighbor not in visited:
+            dfs(graph, neighbor, visited)  # Recursive call for unvisited neighbors
+
+
+def bfs(graph, start):
+    visited = set()
+    queue = deque([start])
+    visited.add(start)  # Mark the starting vertex as visited
+    
+    while queue:
+        vertex = queue.popleft()  # Dequeue a vertex from the queue
+        print(vertex)  # Process the current vertex
+        
+        for neighbor in graph[vertex]:
+            if neighbor not in visited:
+                queue.append(neighbor)  # Enqueue unvisited neighbors
+                visited.add(neighbor)  # Mark the neighbor as visited
+                
+                
+                
+
+
+# Graph represented as an adjacency list
+graph = {
+    'A': ['D', 'B','C'],
+    'B': ['A', 'C'],
+    'C': ['A', 'B','E'],
+    'D': ['A'],
+    'E': ['C']
+}
+
+# Example usage of DFS
+print("Depth First Search (DFS) Traversal:")
+dfs(graph, 'A')
+
+print("\n")
+
+# Example usage of BFS
+print("Breadth First Search (BFS) Traversal:")
+bfs(graph, 'A')
